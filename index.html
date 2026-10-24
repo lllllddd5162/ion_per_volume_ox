@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>단위 부피당 이온 수 OX</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap">
+<style>
+:root{--navy:#23426b;--teal:#1c7c74;--red:#b23a3a;--blue:#2a6fb0;--ink:#1d2530;--mute:#5d6878;--line:#d6dce4;--bg:#f4f6f9;--ok:#22743a;--okbg:#e5f4e9;--ngbg:#fbeae8}
+*{box-sizing:border-box}html,body{margin:0}
+body{font-family:"Noto Sans KR",system-ui,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;color:var(--ink);background:var(--bg);line-height:1.7;-webkit-text-size-adjust:100%}
+button{font:inherit;cursor:pointer}
+header{background:var(--navy);color:#fff;padding:14px 20px}
+header b{font-size:18px;font-weight:900}header span{opacity:.75;font-size:13px;margin-left:10px}
+main{max-width:760px;margin:0 auto;padding:18px 16px 40px}
+h1{font-size:24px;font-weight:900;color:var(--navy);margin:4px 0 2px;letter-spacing:-.4px}
+.lead{color:var(--mute);margin:0 0 14px}
+.intro{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-bottom:16px}
+.intro h2{font-size:15px;margin:0 0 6px;color:var(--teal)}
+.intro p{margin:4px 0;font-size:14.5px}
+.intro canvas{display:block;width:100%;max-width:560px;height:auto;margin:6px auto 0}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px}
+.step{background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 8px;text-align:center;font-weight:700;font-size:14px;color:var(--mute)}
+.step small{display:block;font-weight:500;font-size:12px}
+.step.on{border-color:var(--navy);color:var(--navy);box-shadow:0 0 0 2px var(--navy) inset}
+.step.t.on{border-color:var(--red);color:var(--red);box-shadow:0 0 0 2px var(--red) inset}
+.bar{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--mute);margin-bottom:10px}
+.prog{flex:1;height:7px;background:#e1e6ec;border-radius:99px;overflow:hidden}
+.prog i{display:block;height:100%;width:0;background:var(--navy);transition:.3s}
+.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px 20px}
+.num{font-size:13px;font-weight:700;color:var(--mute);margin-bottom:6px}
+.q{font-size:19px;font-weight:500;line-height:1.75;min-height:66px}
+.q b{color:var(--navy)}
+.card canvas{display:block;width:100%;max-width:520px;height:auto;margin:10px auto 0}
+.ox{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}
+.ox button{border:2px solid #c9d2dc;background:#fff;border-radius:14px;padding:14px 0;font-size:34px;font-weight:900;line-height:1}
+.ox .o{color:var(--blue)}.ox .x{color:var(--red)}
+.ox button:hover:not(:disabled){background:#f6f9fc;border-color:#9fb0c4}
+.ox button.right{border-color:var(--ok);background:var(--okbg)}
+.ox button.wrong{border-color:var(--red);background:var(--ngbg)}
+.ox button:disabled{cursor:default}
+.fb{margin-top:16px;border-radius:12px;padding:12px 14px;font-size:15px}
+.fb.ok{background:var(--okbg);border:1px solid #b9dcc2}.fb.ng{background:var(--ngbg);border:1px solid #ecc4be}
+.fb h4{margin:0 0 4px;font-size:16px}.fb.ok h4{color:var(--ok)}.fb.ng h4{color:var(--red)}
+.next{display:flex;justify-content:flex-end;margin-top:14px}
+.btn{border:none;border-radius:10px;padding:10px 18px;font-weight:700;background:var(--navy);color:#fff}
+.btn.red{background:var(--red)}
+.big{font-size:44px;font-weight:900;color:var(--navy);margin:4px 0}
+.rev{margin-top:12px}
+.rev .it{padding:10px 0;border-bottom:1px dashed var(--line);font-size:14.5px}
+.rev .it .m{font-weight:900;margin-right:6px}.rev .it .m.o{color:var(--ok)}.rev .it .m.x{color:var(--red)}
+.rev .it .e{color:var(--mute);font-size:13.5px;margin-top:2px}
+sub,sup{font-size:.72em;line-height:0}
+.foot{text-align:center;color:var(--mute);font-size:12px;padding:6px 0 30px}
+@media(max-width:520px){.steps{grid-template-columns:1fr 1fr}.q{font-size:17px}h1{font-size:21px}}
+</style>
+</head>
+<body>
+<header><b>단위 부피당 이온 수 OX</b><span>통합과학2 · 중화 반응</span></header>
+<main>
+  <h1>단위 부피당 이온 수, OX로 잡기</h1>
+  <p class="lead">문장을 읽고 맞으면 <b style="color:var(--blue)">O</b>, 틀리면 <b style="color:var(--red)">X</b>를 눌러요. 바로 해설이 나와요.</p>
+
+  <section class="intro">
+    <h2>먼저 그림으로 이해하기</h2>
+    <p><b>단위 부피당 이온 수</b> = 1 mL 속에 들어 있는 이온 수 = 얼마나 <b>빽빽한지</b>(진한지)</p>
+    <canvas id="introCv"></canvas>
+    <p style="font-size:13.5px;color:var(--mute)">이온 수는 똑같이 6개지만, 부피가 2배가 되면 1 mL 속 이온 수는 절반이 돼요. → <b>이온 수 = 단위 부피당 이온 수 × 부피</b></p>
+  </section>
+
+  <div class="steps" id="steps"></div>
+  <div class="bar"><span id="cnt"></span><div class="prog"><i id="pg"></i></div><span id="sc"></span></div>
+  <div class="card" id="card"></div>
+</main>
+<div class="foot">제일학원</div>
+<script>
+"use strict";
+const $ = s => document.querySelector(s);
+const ri = (a, b) => a + Math.floor(Math.random() * (b - a + 1));
+const pick = a => a[Math.floor(Math.random() * a.length)];
+const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+const H = "H<sup>+</sup>", OH = "OH<sup>−</sup>", CL = "Cl<sup>−</sup>", NA = "Na<sup>+</sup>";
+const n = x => (x === 1 ? "" : x) + "<i>N</i>";
+
+/* ---------------- 문장 은행 ----------------
+   a : 정답(true = O), e : 해설, g : 그래프 보여주기 */
+const BANK = {
+  1: [
+    { t: "단위 부피당 이온 수는 수용액 <b>1 mL 속</b>에 들어 있는 이온의 수를 뜻한다.", a: true, e: "맞아요. '단위 부피' = 1 mL라고 생각하면 돼요." },
+    { t: "단위 부피당 이온 수가 클수록 이온이 더 빽빽하게(진하게) 들어 있다.", a: true, e: "맞아요. 1 mL에 이온이 많을수록 진한 용액이에요." },
+    { t: "이온 수 = 단위 부피당 이온 수 <b>×</b> 부피 이다.", a: true, e: "맞아요. 1 mL당 개수에 mL 수를 곱하면 전체 개수예요." },
+    { t: "단위 부피당 이온 수 = 이온 수 <b>×</b> 부피 이다.", a: false, e: "틀려요. 단위 부피당 이온 수 = 이온 수 <b>÷</b> 부피예요." },
+    () => { const v = pick([10, 20, 30]), c = ri(2, 5), ok = Math.random() < .5, say = ok ? c : c + pick([1, 2]); return { t: `수용액 ${v} mL에 이온이 ${n(c * v)} 들어 있으면, 단위 부피당 이온 수는 ${n(say)}이다.`, a: ok, e: `${n(c * v)} ÷ ${v} = ${n(c)}이에요.` }; },
+    () => { const v = pick([10, 20, 30]), c = ri(2, 4), ok = Math.random() < .5, say = ok ? c * v : c + v; return { t: `단위 부피당 이온 수가 ${n(c)}인 수용액 ${v} mL에는 이온이 ${n(say)} 들어 있다.`, a: ok, e: `${n(c)} × ${v} = ${n(c * v)}예요.${ok ? "" : " 더하면 안 되고 곱해요."}` }; },
+    { t: "같은 수용액이라면 10 mL를 덜어 내도 덜어 낸 용액의 단위 부피당 이온 수는 처음과 같다.", a: true, e: "맞아요. 같은 용액은 어느 부분이든 진하기가 같아요. 개수만 줄어요." },
+    { t: "같은 수용액 10 mL와 30 mL에 들어 있는 이온 수는 같다.", a: false, e: "틀려요. 진하기는 같지만 부피가 3배라 이온 수도 3배예요." },
+    { t: "수용액에 증류수를 더 넣으면 이온 수는 그대로이고, 단위 부피당 이온 수는 작아진다.", a: true, e: "맞아요. 개수는 그대로인데 부피가 커져서 묽어져요." },
+    { t: "수용액에 증류수를 더 넣으면 단위 부피당 이온 수가 커진다.", a: false, e: "틀려요. 물을 넣으면 묽어져서 단위 부피당 이온 수가 작아져요." },
+    { t: "수용액 20 mL에 증류수 20 mL를 더 넣으면 단위 부피당 이온 수는 절반이 된다.", a: true, e: "맞아요. 개수는 그대로, 부피는 2배 → 절반이에요." },
+    { t: "HCl 수용액에서는 단위 부피당 " + H + " 수와 단위 부피당 " + CL + " 수가 같다.", a: true, e: "맞아요. HCl → H<sup>+</sup> + Cl<sup>−</sup>, 1 : 1로 나와요." },
+    { t: "단위 부피당 " + H + " 수가 3<i>N</i>인 HCl 수용액의 단위 부피당 전체 이온 수는 3<i>N</i>이다.", a: false, e: "틀려요. Cl<sup>−</sup>도 3<i>N</i> 있으니 전체는 6<i>N</i>이에요." }
+  ],
+  2: [
+    { t: "수용액 10 mL와 수용액 20 mL를 섞으면 혼합 용액의 부피는 30 mL이다. (단, 부피는 섞은 용액 부피의 합)", a: true, e: "맞아요. 혼합 용액의 부피 = 섞은 부피의 합이에요." },
+    { t: "혼합 용액의 단위 부피당 이온 수를 구할 때는 <b>처음 용액의 부피</b>로만 나눈다.", a: false, e: "틀려요. 섞은 뒤의 <b>전체 부피</b>로 나눠야 해요. 가장 많이 하는 실수예요!" },
+    { t: "HCl 수용액에 NaOH 수용액을 넣어도 " + CL + "의 <b>수</b>는 변하지 않는다.", a: true, e: "맞아요. Cl<sup>−</sup>은 구경꾼 이온이라 반응하지 않아요." },
+    { t: "HCl 수용액에 NaOH 수용액을 넣어도 <b>단위 부피당</b> " + CL + " 수는 변하지 않는다.", a: false, e: "틀려요. Cl<sup>−</sup> 수는 그대로지만 부피가 늘어서 단위 부피당 수는 작아져요." },
+    { t: "HCl 수용액에 NaOH 수용액을 넣으면 " + NA + "의 수는 넣은 만큼 늘어난다.", a: true, e: "맞아요. Na<sup>+</sup>도 구경꾼 이온이라 넣은 그대로 남아요." },
+    () => { const v1 = 10, v2 = pick([10, 20, 30, 50]), m = ri(1, 3), cl = m * (v1 + v2), ok = Math.random() < .5, say = ok ? m : cl / v1; return { t: `${CL}이 ${n(cl)} 들어 있는 HCl 수용액 ${v1} mL에 NaOH 수용액 ${v2} mL를 넣으면, 혼합 용액의 단위 부피당 ${CL} 수는 ${n(say)}이다.`, a: ok, e: `${CL} ${n(cl)} ÷ 전체 ${v1 + v2} mL = ${n(m)}이에요.${ok ? "" : " 처음 부피 " + v1 + " mL로 나누면 안 돼요."}` }; },
+    { t: "같은 혼합 용액 안에서 단위 부피당 " + NA + " 수가 단위 부피당 " + CL + " 수보다 크면, " + NA + "의 개수도 " + CL + "의 개수보다 많다.", a: true, e: "맞아요. 같은 용액이라 나누는 부피가 같으니, 단위 부피당 수의 크기 = 개수의 크기예요." },
+    { t: "단위 부피당 " + H + " 수가 더 큰 수용액에는 언제나 " + H + "이 더 많이 들어 있다.", a: false, e: "틀려요. 부피가 다르면 개수는 달라져요. 진하기 × 부피로 비교해야 해요." },
+    { t: "산과 염기를 섞은 혼합 용액의 액성은 단위 부피당 수에 부피를 곱해 " + H + " 수와 " + OH + " 수를 비교해서 판단한다.", a: true, e: "맞아요. 실제 개수가 많은 쪽이 남아요." },
+    () => { const ca = ri(1, 3), cb = ri(1, 3), va = pick([10, 20]), vb = pick([10, 20, 30]); const h = ca * va, o = cb * vb; if (h === o) return null; const acid = h > o, sayAcid = Math.random() < .5; return { t: `단위 부피당 ${H} 수가 ${n(ca)}인 HCl 수용액 ${va} mL와 단위 부피당 ${OH} 수가 ${n(cb)}인 NaOH 수용액 ${vb} mL를 섞은 용액은 ${sayAcid ? "산성" : "염기성"}이다.`, a: sayAcid === acid, e: `${H} ${n(ca)} × ${va} = ${n(h)}, ${OH} ${n(cb)} × ${vb} = ${n(o)} → ${acid ? H : OH}이 남아 ${acid ? "산성" : "염기성"}이에요.` }; },
+    { t: "단위 부피당 " + OH + " 수가 같은 NaOH 수용액 10 mL와 20 mL로 같은 양의 HCl을 중화시킬 수 있다.", a: false, e: "틀려요. 20 mL에는 OH<sup>−</sup>이 2배 들어 있어서 중화시킬 수 있는 HCl도 2배예요." }
+  ],
+  3: [
+    { g: 1, t: "HCl 수용액에 NaOH 수용액을 넣을 때, 단위 부피당 " + CL + " 수 그래프는 점점 <b>내려간다</b>.", a: true, e: "맞아요. Cl<sup>−</sup> 수는 그대로인데 부피가 계속 커지니까요." },
+    { g: 1, t: "단위 부피당 " + CL + " 수 그래프는 수평선(일정)이다.", a: false, e: "틀려요. 일정한 건 Cl<sup>−</sup>의 '수'예요. 단위 부피당 수는 내려가요." },
+    { g: 1, t: "단위 부피당 " + NA + " 수 그래프는 0에서 시작해 올라간다.", a: true, e: "맞아요. 처음에는 Na<sup>+</sup>이 없고, NaOH를 넣을수록 늘어나요." },
+    { g: 1, t: "NaOH 수용액을 계속 넣으면 단위 부피당 " + NA + " 수는 끝없이 계속 커진다.", a: false, e: "틀려요. 혼합 용액이 NaOH 수용액과 비슷해져서, NaOH 수용액의 단위 부피당 Na<sup>+</sup> 수에 가까워질 뿐이에요." },
+    { g: 1, t: "단위 부피당 " + H + " 수는 중화점에서 0이 된다.", a: true, e: "맞아요. 중화점에서 H<sup>+</sup>이 모두 반응해요." },
+    { g: 1, t: "중화점 이후에는 단위 부피당 " + OH + " 수가 0에서부터 늘어난다.", a: true, e: "맞아요. 반응할 H<sup>+</sup>이 없어 넣은 OH<sup>−</sup>이 남기 시작해요." },
+    { g: 1, t: "단위 부피당 " + CL + " 그래프와 단위 부피당 " + NA + " 그래프가 만나는 점은 중화점이다.", a: true, e: "맞아요. 같은 용액에서 단위 부피당 수가 같으면 개수도 같아요 → Na<sup>+</sup> 수 = Cl<sup>−</sup> 수 = 중화점." },
+    { g: 1, t: "단위 부피당 " + H + " 그래프와 단위 부피당 " + NA + " 그래프가 만나는 점이 중화점이다.", a: false, e: "틀려요. 중화점은 Cl<sup>−</sup>과 Na<sup>+</sup> 그래프가 만나는 점이에요. 중화점에서 H<sup>+</sup>은 0이에요." },
+    { g: 2, t: "단위 부피당 <b>전체 이온 수</b>는 중화점에서 가장 크다.", a: false, e: "틀려요. 중화점까지 이온 수는 일정하고 부피만 늘어서 줄어들다가, 중화점 이후 다시 늘어요 → 중화점에서 <b>가장 작아요</b>." },
+    { g: 2, t: "단위 부피당 전체 이온 수 그래프는 중화점에서 꺾인다.", a: true, e: "맞아요. 중화점을 기준으로 줄어들다가 늘어나요." },
+    { t: "이온 '수' 그래프는 꺾인 직선이고, '단위 부피당' 이온 수 그래프는 곡선이다.", a: true, e: "맞아요. 단위 부피당은 부피로 나누기 때문에 곡선이 돼요." },
+    { g: 1, t: "처음 HCl 수용액 속 단위 부피당 " + CL + " 수는 그래프의 맨 왼쪽(넣은 부피 0 mL) 값이다.", a: true, e: "맞아요. 아직 아무것도 넣지 않았을 때의 값이에요." }
+  ]
+};
+function draw(i, s) { const it = BANK[s][i]; return typeof it === "function" ? it() : it; }
+function make(s) { for (let k = 0; k < 30; k++) { const i = ri(0, BANK[s].length - 1), q = draw(i, s); if (q) return Object.assign({ key: s + "-" + i, s }, q); } }
+
+/* ---------------- 그림 ---------------- */
+function setup(cv, W, Hh) { const dpr = Math.min(window.devicePixelRatio || 1, 2); cv.width = W * dpr; cv.height = Hh * dpr; cv.style.aspectRatio = `${W}/${Hh}`; const c = cv.getContext("2d"); c.scale(dpr, dpr); return c; }
+function beaker(c, x, y, w, h, fill, k, label, sub) {
+  const top = y + h * .25;
+  c.fillStyle = "#e3eef8"; c.fillRect(x, top, w, y + h - top);
+  c.strokeStyle = "#1d2530"; c.lineWidth = 2; c.beginPath(); c.moveTo(x - 6, y - 4); c.lineTo(x, y); c.lineTo(x, y + h); c.lineTo(x + w, y + h); c.lineTo(x + w, y); c.lineTo(x + w + 6, y - 4); c.stroke();
+  const pts = [[.25, .45], [.55, .35], [.8, .55], [.35, .75], [.65, .8], [.2, .9]];
+  for (let i = 0; i < k; i++) { const [px, py] = pts[i]; c.fillStyle = "#ef6f4f"; c.beginPath(); c.arc(x + px * w, top + (py - .25) / .75 * (y + h - top) * .9 + 4, 7, 0, Math.PI * 2); c.fill(); }
+  c.fillStyle = "#1d2530"; c.font = "700 13px Noto Sans KR, sans-serif"; c.textAlign = "center"; c.fillText(label, x + w / 2, y + h + 20);
+  c.fillStyle = "#5d6878"; c.font = "12px Noto Sans KR, sans-serif"; c.fillText(sub, x + w / 2, y + h + 37);
+}
+function drawIntro() {
+  const c = setup($("#introCv"), 560, 200);
+  beaker(c, 70, 50, 110, 90, 0, 6, "10 mL · 이온 6개", "1 mL당 0.6개 (진함)");
+  c.fillStyle = "#23426b"; c.font = "700 14px Noto Sans KR, sans-serif"; c.textAlign = "center"; c.fillText("물 10 mL 추가 →", 280, 105);
+  // 큰 비커 : 같은 6개를 넓게
+  const x = 370, y = 20, w = 140, h = 120, top = y + h * .2;
+  c.fillStyle = "#e3eef8"; c.fillRect(x, top, w, y + h - top);
+  c.strokeStyle = "#1d2530"; c.lineWidth = 2; c.beginPath(); c.moveTo(x - 6, y - 4); c.lineTo(x, y); c.lineTo(x, y + h); c.lineTo(x + w, y + h); c.lineTo(x + w, y); c.lineTo(x + w + 6, y - 4); c.stroke();
+  [[.15, .2], [.6, .15], [.88, .45], [.3, .6], [.7, .8], [.12, .9]].forEach(([px, py]) => { c.fillStyle = "#ef6f4f"; c.beginPath(); c.arc(x + px * w, top + py * (y + h - top) * .92 + 3, 7, 0, Math.PI * 2); c.fill(); });
+  c.fillStyle = "#1d2530"; c.font = "700 13px Noto Sans KR, sans-serif"; c.fillText("20 mL · 이온 6개", x + w / 2, y + h + 20);
+  c.fillStyle = "#5d6878"; c.font = "12px Noto Sans KR, sans-serif"; c.fillText("1 mL당 0.3개 (묽음)", x + w / 2, y + h + 37);
+}
+function drawGraph(cv, kind) {
+  const W = 520, Hh = 270, c = setup(cv, W, Hh), pad = { l: 40, r: 70, t: 16, b: 40 };
+  const V0 = 20, ca = 3, cb = 2, max = 70, vn = 30;
+  const f = v => { const T = V0 + v, h0 = ca * V0, b = cb * v, r = Math.min(h0, b); return { cl: h0 / T, na: b / T, h: (h0 - r) / T, oh: (b - r) / T, tot: 2 * Math.max(h0, b) / T }; };
+  const ymax = kind === 2 ? 6.6 : 3.3;
+  const X = v => pad.l + v / max * (W - pad.l - pad.r), Y = y => Hh - pad.b - y / ymax * (Hh - pad.t - pad.b);
+  c.strokeStyle = "#1d2530"; c.lineWidth = 1.3; c.beginPath(); c.moveTo(pad.l, pad.t); c.lineTo(pad.l, Hh - pad.b); c.lineTo(W - pad.r, Hh - pad.b); c.stroke();
+  c.strokeStyle = "#b23a3a"; c.setLineDash([4, 4]); c.beginPath(); c.moveTo(X(vn), pad.t); c.lineTo(X(vn), Hh - pad.b); c.stroke(); c.setLineDash([]);
+  c.fillStyle = "#b23a3a"; c.font = "700 12px Noto Sans KR, sans-serif"; c.textAlign = "center"; c.fillText("중화점", X(vn), Hh - pad.b + 15);
+  c.fillStyle = "#5d6878"; c.font = "12px Noto Sans KR, sans-serif"; c.fillText("넣어 준 NaOH 수용액의 부피 →", (pad.l + W - pad.r) / 2, Hh - 6);
+  c.save(); c.translate(14, (pad.t + Hh - pad.b) / 2); c.rotate(-Math.PI / 2); c.fillText("단위 부피당 이온 수", 0, 0); c.restore();
+  const lines = kind === 2 ? [["전체 이온", "tot", "#23426b", []]] : [["Cl⁻", "cl", "#1d2530", []], ["Na⁺", "na", "#2a6fb0", []], ["H⁺", "h", "#ef6f4f", [6, 4]], ["OH⁻", "oh", "#8e44ad", [6, 4]]];
+  lines.forEach(([name, k, col, dash], j) => {
+    c.strokeStyle = col; c.lineWidth = 2.4; c.setLineDash(dash); c.beginPath();
+    for (let i = 0; i <= 200; i++) { const v = max * i / 200, y = f(v)[k]; i ? c.lineTo(X(v), Y(y)) : c.moveTo(X(v), Y(y)); } c.stroke(); c.setLineDash([]);
+    const yEnd = f(max)[k]; c.fillStyle = col; c.font = "700 13px Noto Sans KR, sans-serif"; c.textAlign = "left";
+    c.fillText(name, X(max) + 6, Y(yEnd) + 4 + ({ h: -6, oh: -7, cl: 7 }[k] || 0));
+  });
+}
+
+/* ---------------- 진행 ---------------- */
+const STEPS = [{ id: 1, t: "1단계", d: "뜻과 계산" }, { id: 2, t: "2단계", d: "섞으면?" }, { id: 3, t: "3단계", d: "그래프 읽기" }, { id: "T", t: "테스트", d: "섞어서 10문제" }];
+let stepId = 1, list = [], idx = 0, score = 0, log = [], done = false;
+function build() {
+  if (stepId === "T") {
+    const pool = []; [1, 2, 3].forEach(s => { for (let k = 0; k < 6; k++) { const q = make(s); if (q && !pool.some(p => p.t === q.t)) pool.push(q); } });
+    let os = shuffle(pool.filter(q => q.a)), xs = shuffle(pool.filter(q => !q.a));
+    list = shuffle(os.slice(0, 5).concat(xs.slice(0, 5)));
+  } else {
+    const seen = new Set(); list = [];
+    for (let k = 0; k < 60 && list.length < 10; k++) { const q = make(stepId); if (q && !seen.has(q.key)) { seen.add(q.key); list.push(q); } }
+  }
+  idx = 0; score = 0; log = []; show();
+}
+function renderSteps() {
+  const box = $("#steps"); box.innerHTML = "";
+  STEPS.forEach(s => { const b = document.createElement("button"); b.className = "step" + (s.id === "T" ? " t" : "") + (s.id === stepId ? " on" : ""); b.innerHTML = `${s.t}<small>${s.d}</small>`; b.onclick = () => { stepId = s.id; renderSteps(); build(); }; box.append(b); });
+}
+function bar() { $("#cnt").textContent = `${Math.min(idx + 1, list.length)} / ${list.length}`; $("#pg").style.width = `${idx / list.length * 100}%`; $("#sc").textContent = `맞힘 ${score}`; }
+function show() {
+  if (idx >= list.length) return result();
+  done = false; const q = list[idx], card = $("#card");
+  card.innerHTML = `<div class="num">${stepId === "T" ? "테스트" : STEPS.find(s => s.id === stepId).t} · ${idx + 1}번</div><div class="q">${q.t}</div>`;
+  if (q.g) { const cv = document.createElement("canvas"); card.append(cv); drawGraph(cv, q.g); }
+  const ox = document.createElement("div"); ox.className = "ox";
+  ox.innerHTML = `<button class="o" data-v="1">O</button><button class="x" data-v="0">X</button>`;
+  ox.querySelectorAll("button").forEach(b => b.onclick = () => answer(b.dataset.v === "1", b));
+  card.append(ox); card.append(Object.assign(document.createElement("div"), { id: "fb" }));
+  bar();
+}
+function answer(v, btn) {
+  if (done) return; done = true; const q = list[idx], ok = v === q.a; if (ok) score++;
+  log.push({ q, ok });
+  document.querySelectorAll(".ox button").forEach(b => { b.disabled = true; const bv = b.dataset.v === "1"; if (bv === q.a) b.classList.add("right"); else if (b === btn) b.classList.add("wrong"); });
+  $("#fb").innerHTML = `<div class="fb ${ok ? "ok" : "ng"}"><h4>${ok ? "정답!" : "아쉬워요"} &nbsp;정답은 ${q.a ? "O" : "X"}</h4>${q.e}</div>
+    <div class="next"><button class="btn ${idx === list.length - 1 ? "red" : ""}" id="nx">${idx === list.length - 1 ? "결과 보기" : "다음 →"}</button></div>`;
+  $("#nx").onclick = () => { idx++; show(); };
+  $("#sc").textContent = `맞힘 ${score}`;
+}
+function result() {
+  $("#pg").style.width = "100%"; $("#cnt").textContent = `${list.length} / ${list.length}`;
+  const wrong = log.filter(l => !l.ok);
+  const msg = score === list.length ? "완벽해요!" : score >= list.length * .7 ? "잘했어요. 틀린 문장만 다시 읽어 봐요." : "괜찮아요. 아래 해설을 읽고 한 번 더 풀어 봐요.";
+  $("#card").innerHTML = `<div class="num">결과</div><div class="big">${score} / ${list.length}</div><p>${msg}</p>
+    ${wrong.length ? `<div style="font-weight:700;margin-top:10px">틀린 문장 다시 보기</div><div class="rev">${wrong.map(l => `<div class="it"><span class="m ${l.q.a ? "o" : "x"}">${l.q.a ? "O" : "X"}</span>${l.q.t}<div class="e">${l.q.e}</div></div>`).join("")}</div>` : ""}
+    <div class="next"><button class="btn" id="again">새 문제로 다시 풀기</button></div>`;
+  $("#again").onclick = build;
+}
+const m = new URLSearchParams(location.search).get("s");
+if (m) stepId = m === "T" || m === "t" ? "T" : (Number(m) || 1);
+drawIntro(); renderSteps(); build();
+window.addEventListener("error", e => { const d = document.getElementById("errbox") || document.body.appendChild(Object.assign(document.createElement("div"), { id: "errbox", style: "position:fixed;bottom:0;left:0;right:0;background:#b23a3a;color:#fff;font-size:12px;padding:6px 10px" })); d.textContent = "오류: " + e.message; });
+</script>
+</body>
+</html>
